@@ -4,7 +4,7 @@
   "description": "",
   "main": "print.js",
   "scripts": {
-    
+  "dev": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -13,6 +13,7 @@
   },
   "author": "",
   "license": "ISC",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/battulga-ss/academy-back-end2/issues"
   },
