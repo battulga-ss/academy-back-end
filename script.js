@@ -1,0 +1,1 @@
+const {startGame} = require('./print.js')
