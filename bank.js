@@ -44,12 +44,12 @@ export const bankAnswer = async (users, user) => {
           break;
 
     case "check-balance":
-          console.log("uldegdel");
-          await CheckBalance(user, users);
+          console.log(user.balance,"uldegdel");
+        
           break;
-      case "Transaction":
+      case "transaction":
           console.log("transaction")
-          await transaction(user, users);
+          await transaction( users);
           break;
       
     case "exit":
@@ -122,7 +122,8 @@ const withdraw = async (users, user) => {
     return withdraw;
   }
 
-  user.balance -= amount;
+    user.balance -= amount;
+    console.log(user,'user')
     await updateUser(users, user, amount, "withdraw");
 };
 
@@ -136,6 +137,44 @@ const showHistory = async (user, users, currentBalance) => {
     
 
 };
+
+const transaction = async (users) => {
+    const { rec, amount } = await inquirer.prompt([
+        {
+            type: "input",
+            name: "rec",
+            message: "henruu ywuulah we "
+        },
+        {
+            type: "number",
+            name: "amount",
+            message: "hediig ywuulah we :",
+        }
+    ]);
+
+ 
+            
+    const result = users.filter((e) =>
+        e.username == rec
+    
+    );
+    
+    if (result.length == 0) {
+        console.log("user not found")
+    }
+
+    let balance = parseInt(result.balance) || 0;
+
+    result.balance -= amount;
+    rec.balance += amount;
+      
+
+
+    return await updateUser(users, result, amount, "transaction");
+
+
+}
+
 
 
 
