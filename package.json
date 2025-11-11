@@ -1,0 +1,24 @@
+{
+  "name": "erxes-academy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/battulga-ss/academy-back-end2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/battulga-ss/academy-back-end2/issues"
+  },
+  "homepage": "https://github.com/battulga-ss/academy-back-end2#readme",
+  "dependencies": {
+    "inquirer": "^12.10.0"
+  }
+}

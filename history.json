@@ -1,0 +1,1 @@
+{"test":[{"type":"deposit","amount":4000,"balance":9000,"currentBalance":0},{"type":"deposit","amount":1000,"balance":10000,"currentBalance":0},{"type":"withdraw","amount":50,"balance":9950,"currentBalance":9950}]}
