@@ -3,22 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/battulga-ss/academy-back-end2.git"
+    "url": "git+https://github.com/Enkhtuvshin0513/academy-backend-.git"
   },
   "author": "",
   "license": "ISC",
-  "type": "module",
   "bugs": {
-    "url": "https://github.com/battulga-ss/academy-back-end2/issues"
+    "url": "https://github.com/Enkhtuvshin0513/academy-backend-/issues"
   },
-  "homepage": "https://github.com/battulga-ss/academy-back-end2#readme",
+  "homepage": "https://github.com/Enkhtuvshin0513/academy-backend-#readme",
   "dependencies": {
-    "inquirer": "^12.10.0"
-  }
+    "express": "^5.1.0",
+    "inquirer": "^12.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  },
+  "keywords": []
 }
