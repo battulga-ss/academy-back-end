@@ -7,28 +7,21 @@ export const login = (req, res) => {
     }
 app.post("/login", async (req, res) => {
   console.log(req.body);
-  const username = req.body.username
+  const email = req.body.email
   const password = req.body.password
   
    const users = await getUsers();
  
    const user = users.find(value => {
-     return value.username === username && value.password === password;
+     return value.email === email && value.password === password;
    });
  
-   if (!user) {
+   if (!user) {res.send("done")
 
   res.send("username eswel password buruu bn!");
    } else {
 res.send("success");
    }
   
-});
-
-  
-
-
-
-
-  res.send("Success");
+});  
 };

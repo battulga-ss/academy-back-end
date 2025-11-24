@@ -6,5 +6,5 @@ export const bankRouter = new express.Router();
 bankRouter.get("/check-balance/:userId", checkBalanceController);
 
 bankRouter.get("/get-history", (req, res) => {
-  res.send(5000);
+  res.send(currentBalance);
 });
