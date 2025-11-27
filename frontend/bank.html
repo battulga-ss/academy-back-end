@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bank</title>
+    <style>
+      /* Body styling */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 0;
+        margin: 0;
+        min-height: 100vh;
+        color: #333;
+      }
+
+      /* Title */
+      h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+      }
+
+      /* Table styling */
+      table {
+        width: 80%;
+        max-width: 600px;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+      }
+
+      th, td {
+        border: 1px solid #ccc;
+        padding: 12px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+
+      tr:nth-child(even) {
+        background-color: #fafafa;
+      }
+
+      /* Buttons */
+      button {
+        width: 150px;
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #fff;
+        color: #333;
+        transition: all 0.2s ease;
+      }
+
+      button:hover {
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>bank</h1>
+    <table>
+      <th>
+        <!-- Add table headers here -->
+      </th>
+    </table>
+    <button id="logout" onclick="logout()">logout</button>
+    <button id="deposit" onclick="deposit()">deposit</button>
+
+    <script>
+      const logout = async () => {
+        const response = await fetch("http://localhost:3000/user/logout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+
+        if (response.ok) {
+          window.location.href = "/login.html";
+        } else {
+          window.alert("Amjiltgui");
+        }
+      };
+
+      const deposit = async () => {
+        const response = await fetch("http://localhost:3000/bank/deposit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount: 3000
+          })
+        });
+
+        if (response.ok) {
+          window.location.href = "/deposit.html";
+        } else {
+          window.alert("Amjiltgui");
+        }
+      };
+    </script>
+  </body>
+</html>

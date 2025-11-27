@@ -1,14 +1,9 @@
-import express from "express";
-import { login } from "../controllers/user.js";
+import { Router } from "express";
+import { login, logout } from "../controllers/user.js";
 
-export const userRouter = new express.Router();
+export const userRouters = new Router();
 
-userRouter.post("/login", login);
-
-userRouter.post("register", (req, res) => {
-  res.send("Success!");
-});
-
-userRouter.post("/logout", (req, res) => {
-  res.send("Success!");
-});
+userRouters.post("/login", login);
+console.log("boljn")
+userRouters.post("/logout", logout);
+console.log("thhh")

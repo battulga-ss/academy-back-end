@@ -1,27 +1,27 @@
 export const login = (req, res) => {
-
-    const getUsers = async () => {
-        const userRawData = await fs.readFile("users.json", "utf-8");
-
-        const users = JSON.parse(userRawData)
-    }
-app.post("/login", async (req, res) => {
-  console.log(req.body);
-  const email = req.body.email
+      console.log()
+    const email = req.body.email
   const password = req.body.password
+  console.log(email, password)
   
-   const users = await getUsers();
- 
-   const user = users.find(value => {
-     return value.email === email && value.password === password;
-   });
- 
-   if (!user) {res.send("done")
 
-  res.send("username eswel password buruu bn!");
-   } else {
-res.send("success");
-   }
-  
-});  
+
+  res.cookie("user", email, {
+    httpOnly: true,
+    secure: false
+  });
+  res.json({
+    user: "userId123"
+  });
 };
+
+export const logout = (req, res) => {
+  res.clearCookie("user");
+
+  res.send("Success!");
+};
+
+
+
+
+

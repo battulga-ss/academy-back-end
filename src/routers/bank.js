@@ -1,10 +1,15 @@
-import express from "express";
-import { checkBalanceController } from "../controllers/bank.js";
+import { Router } from "express";
 
-export const bankRouter = new express.Router();
+export const bankRouters = new Router();
 
-bankRouter.get("/check-balance/:userId", checkBalanceController);
+bankRouters.post("/deposit", (req, res) => {
+  console.log(req.user);
+  console.log("hahaha");
 
-bankRouter.get("/get-history", (req, res) => {
-  res.send(currentBalance);
+  
+
+  if (!req.user) {
+    res.send("Newtreigui bn");
+  }
+  res.send("success");
 });
