@@ -1,0 +1,18 @@
+{
+  "dorj": [
+    {
+      "type": "deposit",
+      "amount": 1000,
+      "balance": 1000,
+      "currentBalance": 1000
+    },
+    { "type": "deposit", "amount": 1000, "balance": 3000, "currentBalance": 0 },
+    { "type": "deposit", "amount": 1000, "balance": 4000, "currentBalance": 0 },
+    {
+      "type": "withdraw",
+      "amount": 1000,
+      "balance": 1000,
+      "currentBalance": 1000
+    }
+  ]
+}

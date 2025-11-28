@@ -10,6 +10,10 @@ bankRouters.post("/deposit", (req, res) => {
 
   if (!req.user) {
     res.send("Newtreigui bn");
+  
+  
   }
+  
+  
   res.send("success");
 });

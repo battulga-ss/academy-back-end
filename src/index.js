@@ -23,8 +23,8 @@ app.use("/", (req, res, next) => {
 
   if (userId) {
     const user = {
-      email: "admin@gmail.com",
-      password: "123"
+      email: "test@gmail.com",
+      password: "123",
     };
 
     req.user = user;
