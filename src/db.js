@@ -1,0 +1,12 @@
+import pg from "pg";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+export const db = new pg.Client({
+  connectionString: process.env.DATABASE_URL,
+});
+
+export const connectDb = async () => {
+  // await db.connect();
+};

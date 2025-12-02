@@ -1,32 +1,61 @@
-import fs from "fs";
-export const login = async (req, res) => {
-  const user = JSON.parse(fs.readFileSync("./data/user.json"));
+import {
+  createUserService,
+  updateUserService,
+  getUsersService,
+  getUserByIdService,
+  deleteUserService,
+  getUserAccountsService,
+  getUserTransactionsService,
+} from "../services/user.js";
 
-  const email = req.body.email;
+export const createUser = async (req, res) => {
+  const { username, email, password, firstname, lastname } = req.body;
 
-  const password = req.body.password;
+  const user = await createUserService(
+    username,
+    email,
+    password,
+    firstname,
+    lastname
+  );
 
-  // const data = await fs.readFile(filePath, { encoding: "utf8" });
-  const data = JSON.parse(fs.readFileSync("./data/user.json"));
-
-  const found = user.find((u) => u.email === email && u.password === password);
-
-  if (!found) {
-    return res.status(401).json({ error: "pass or mail buru" });
-  }
-
-  res.cookie("user", email, {
-    httpOnly: true,
-    secure: false,
-  });
-
-  res.json({
-    user: data,
-  });
+  res.json(user);
 };
 
-export const logout = (req, res) => {
-  res.clearCookie("user");
+export const updateUser = async (req, res) => {
+  const { id, username, email, password, firstname, lastname } = req.body;
 
-  res.send("Success!");
+  const user = await updateUserService(
+    id,
+    username,
+    email,
+    password,
+    firstname,
+    lastname
+  );
+
+  res.json(user);
+};
+
+export const getUsers = async (req, res) => {
+  const users = await getUsersService();
+  res.json(users);
+};
+
+export const getUserById = async (req, res) => {
+  const { id } = req.query;
+  const user = await getUserByIdService(id);
+  res.json(user);
+};
+
+export const deleteUser = async (req, res) => {
+  const { id } = req.query;
+  const user = await deleteUserService(id);
+  res.json(user);
+};
+
+export const getUserAccounts = async (req, res) => {
+  const { id } = req.query;
+  const accounts = await getUserAccountsService(id);
+  res.json(accounts);
 };

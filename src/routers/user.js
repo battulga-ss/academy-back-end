@@ -1,9 +1,21 @@
 import { Router } from "express";
-import { login, logout } from "../controllers/user.js";
+import {
+  createUser,
+  updateUser,
+  getUsers,
+  deleteUser,
+  getUserAccounts,
+} from "../controllers/user.js";
 
 export const userRouters = new Router();
 
-userRouters.post("/login", login);
-console.log("boljn")
-userRouters.post("/logout", logout);
-console.log("thhh")
+//user tei holbootoi post route uud
+
+userRouters.post("/create", createUser);
+userRouters.post("/update", updateUser);
+userRouters.post("/delete", deleteUser);
+
+//user tei holbootoi get route uud
+
+userRouters.get("/get-users", getUsers);
+userRouters.get("/get-user-accounts", getUserAccounts);

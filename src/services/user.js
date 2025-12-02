@@ -1,24 +1,54 @@
-import fs from "fs";
+import { db } from "../db.js";
 
+export const createUserService = async (username, email, password) => {
+  const response = await db.query(
+    `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *`,
+    [username, email, password]
+  );
+  return response.rows[0];
+};
 
-const historyRawData = await fs.readFile("history.json", "utf8");
+export const getUsersService = async () => {
+  const response = await db.query("SELECT * FROM users");
+  return response.rows;
+};
 
-const history = JSON.parse(historyRawData);
+export const updateUserService = async (
+  id,
+  username,
+  email,
+  password,
+  firstname,
+  lastname
+) => {
+  const response = await db.query(
+    `UPDATE users SET username = ${username}, email = ${email}, password = ${password}, firstname = ${firstname}, lastname = ${lastname} WHERE id = ${id} RETURNING *`
+  );
+  return response.rows[0];
+};
 
-if (!history[user.name]) {
-  history[user.name] = [];
-}
+export const getUserByIdService = async (id) => {
+  const response = await db.query(`SELECT * FROM users WHERE id = ${id}`);
+  return response.rows[0];
+};
 
-history[user.name].push({ amount: 1000, action: "deposit" });
+export const deleteUserService = async (id) => {
+  const response = await db.query(
+    `DELETE FROM users WHERE id = ${id} RETURNING *`
+  );
+  return response.rows[0];
+};
 
-const historyString = JSON.stringify(history);
+export const getUserAccountsService = async (id) => {
+  const response = await db.query(
+    `SELECT * FROM accounts WHERE user_id = ${id}`
+  );
+  return response.rows;
+};
 
-fs.writeFile("history.json", historyString)
-  .then(() => {
-    console.log("Amjilttai!");
-    process.exit();
-  })
-  .catch((e) => {
-    console.log(e);
-    console.log("aldaa garlaa");
-  });
+export const getUserTransactionsService = async (id) => {
+  const response = await db.query(
+    `SELECT * FROM transactions WHERE user_id = ${id}`
+  );
+  return response.rows;
+};
