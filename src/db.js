@@ -8,5 +8,5 @@ export const db = new pg.Client({
 });
 
 export const connectDb = async () => {
-  // await db.connect();
+  await db.connect();
 };
