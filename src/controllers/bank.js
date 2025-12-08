@@ -1,13 +1,19 @@
-// Шинэ данс үүсгэх
+import { createAccountService } from "../services/bank.js";
+import { updateAccountService } from "../services/bank.js";
+import { getTransactionsByAccountNumberService } from "../services/bank.js";
+
 export const createAccount = async (req, res) => {
   const { user_id, account_number, balance } = req.body;
-  res.json({});
+  const account = await createAccountService(user_id, account_number, balance);
+  res.json(account);
 };
 
 // Дансны мэдээллийг шинэчлэх
 export const updateAccount = async (req, res) => {
-  const { id, user_id, account_number, balance } = req.body;
-  res.json({});
+  const { account_number, balance } = req.body;
+  const update = await updateAccountService(account_number, balance);
+  // consolq.log(user)
+  res.json(update);
 };
 
 // Данс устгах
@@ -33,7 +39,7 @@ export const getAccountByNumber = async (req, res) => {
 
 export const createTransaction = async (req, res) => {
   const { user_id, amount, transaction_type } = req.body;
-  const transaction = await createTransaction(
+  const transaction = await createTransactionService(
     user_id,
     amount,
     transaction_type
@@ -45,7 +51,7 @@ export const createTransaction = async (req, res) => {
 
 export const getTransactions = async (req, res) => {
   const { user_id } = req.query;
-  const transactions = await getTransactions(user_id);
+  const transactions = await getTransactionsService(user_id);
   res.json(transactions);
 };
 
@@ -53,7 +59,7 @@ export const getTransactions = async (req, res) => {
 
 export const getTransactionsByUserId = async (req, res) => {
   const { user_id } = req.query;
-  const transactions = await getTransactionsByUserId(user_id);
+  const transactions = await getTransactionsByUserIdService(user_id);
   res.json(transactions);
 };
 
@@ -61,6 +67,8 @@ export const getTransactionsByUserId = async (req, res) => {
 
 export const getTransactionsByAccountNumber = async (req, res) => {
   const { account_number } = req.query;
-  const transactions = await getTransactionsByAccountNumber(account_number);
+  const transactions = await getTransactionsByAccountNumberService(
+    account_number
+  );
   res.json(transactions);
 };

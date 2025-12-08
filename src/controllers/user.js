@@ -10,7 +10,7 @@ import {
 
 export const createUser = async (req, res) => {
   const { username, email, password, firstname, lastname } = req.body;
-
+  console.log(req.body);
   const user = await createUserService(
     username,
     email,

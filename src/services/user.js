@@ -1,9 +1,15 @@
 import { db } from "../db.js";
 
-export const createUserService = async (username, email, password) => {
+export const createUserService = async (
+  username,
+  email,
+  password,
+  firstname,
+  lastname
+) => {
   const response = await db.query(
-    `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *`,
-    [username, email, password]
+    `INSERT INTO users (username, email, password,firstname,lastname) VALUES ($1, $2, $3,$4,$5) RETURNING *`,
+    [username, email, password, firstname, lastname]
   );
   return response.rows[0];
 };
