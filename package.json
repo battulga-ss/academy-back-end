@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "tsc",
@@ -23,6 +24,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "mongodb": "^7.0.0",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2"
   }
