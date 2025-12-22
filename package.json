@@ -1,22 +1,29 @@
 {
-  "name": "src",
+  "name": "academy-backend-",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node index.js"
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Enkhtuvshin0513/academy-backend-.git"
+  },
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Enkhtuvshin0513/academy-backend-/issues"
+  },
+  "homepage": "https://github.com/Enkhtuvshin0513/academy-backend-#readme",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
   "dependencies": {
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1",
     "nodemon": "^3.1.11",
-    "pg": "^8.16.3"
+    "ts-node": "^10.9.2"
   }
 }
