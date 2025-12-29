@@ -2,15 +2,13 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import { movieRouter } from "./movies/routes.ts";
-import { addMovieRouter } from "./movies/routes.ts";
-import { clear } from "node:console";
 
 // Express app
 const app = express();
 app.use(bodyParser.json());
 
-app.use("/movies", movieRouter);
-app.use("./addMovies", addMovieRouter);
+app.use("/movie", movieRouter);
+// app.use("./addMovies", addMovieRouter);
 // MongoDB connection
 await mongoose
   .connect(
