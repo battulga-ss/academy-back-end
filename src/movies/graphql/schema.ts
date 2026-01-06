@@ -17,6 +17,15 @@ export const movieTypesDefs = `
     title: String
     author: String
   }
+  input UserInput {
+    name:String
+    email:String
+    password:String
+  }
+  input LoginInput {
+    email:String
+    password:String
+  }
 
 `;
 
@@ -27,4 +36,8 @@ export const movieQueryTypeDefs = `
 
 export const movieMutationTypeDefs = `
  addMovie(input: MovieInput): String
+ signupUser(input:UserInput) : String
+ loginUser(input:LoginInput) : String
+
+
 `;

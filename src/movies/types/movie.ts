@@ -1,4 +1,5 @@
 import { Document } from "mongoose";
+// import { IUsers } from "../types/user.ts";
 
 export interface IRating {
   rating: number;
@@ -35,7 +36,15 @@ export interface IMovie {
   };
   tomatoes: ITomateos;
 }
+export interface IUser {
+  name: string;
+  email: string;
+  password: string;
+}
 
 export interface IMoviesDocument extends IMovie, Document {
+  title: string;
+}
+export interface IUserDocument extends IUser, Document {
   title: string;
 }
