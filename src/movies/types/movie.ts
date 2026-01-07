@@ -45,6 +45,3 @@ export interface IUser {
 export interface IMoviesDocument extends IMovie, Document {
   title: string;
 }
-export interface IUserDocument extends IUser, Document {
-  title: string;
-}

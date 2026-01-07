@@ -7,5 +7,7 @@ export interface IUser {
 }
 
 export interface IUserDocument extends IUser, Document {
-  namae: string;
+  email: string;
+  name: string;
+  password: string;
 }

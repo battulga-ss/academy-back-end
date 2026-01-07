@@ -2,7 +2,11 @@ import { Movies } from "../db/models.ts";
 import { Users } from "../db/models.ts";
 import { type IMovie } from "../types/movie.ts";
 import { type IUser } from "../types/user.ts";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
+dotenv.config();
 export const movieMutations = {
   addMovie: async (_root: any, { input }: { input: IMovie }) => {
     const movie = await Movies.insertOne({});
@@ -13,23 +17,42 @@ export const movieMutations = {
   signupUser: async (_root: any, { input }: { input: IUser }) => {
     let { email, password, name } = input;
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const user = await Users.insertOne({
       name,
       email,
-      password,
+      password: hashedPassword,
     });
 
     return user.name;
   },
-};
 
-export const loginMutations = {
   loginUser: async (_root: any, { input }: { input: IUser }) => {
     let { email, password } = input;
-    const data = await Users.find({
+    const loginUser = await Users.findOne({
       email,
-      password,
     });
-    return "loginsucc";
+    const SECRET_KEY = process.env.JWT_SECRET;
+
+    if (!SECRET_KEY) {
+      throw new Error("JWT_SECRET is not defined");
+    }
+    if (!loginUser) {
+      return "userbhq";
+    }
+    const isMatch = await bcrypt.compare(password, loginUser.password);
+    if (!isMatch) {
+      return "usernot found";
+    }
+    const token = jwt.sign(
+      {
+        email: loginUser.email,
+        name: loginUser.name,
+      },
+      SECRET_KEY,
+      { expiresIn: "1h" }
+    );
+    return token;
   },
 };

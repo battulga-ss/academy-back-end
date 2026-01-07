@@ -34,6 +34,7 @@ const MovieSchema: Schema<IMoviesDocument> = new Schema({
   relased: { type: Date, required: true, default: new Date() },
   languages: { type: [String], required: true },
   directors: { type: [String], required: true },
+
   awards: [
     {
       wins: { type: Number },
