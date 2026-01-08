@@ -35,6 +35,17 @@ export const movieTypesDefs = `
     email:String
     password:String
   }
+    input DeleteInput {
+    title: String
+    year: Int
+    }
+
+    input addCommentsInput {
+    movie_id: String
+    name: String
+    email: String
+    text: String
+    }
 
 `;
 
@@ -47,6 +58,6 @@ export const movieMutationTypeDefs = `
  addMovie(input: MovieInput): String
  signupUser(input:UserInput) : String
  loginUser(input:LoginInput) : String
-
-
+ deleteMovie(input: DeleteInput) : String
+addComments(input:addCommentsInput): String
 `;

@@ -1,10 +1,15 @@
 import { Document } from "mongoose";
-// import { IUsers } from "../types/user.ts";
 
 export interface IRating {
   rating: number;
   numReviews: number;
   meter: number;
+}
+export interface IComments {
+  movie_id: String;
+  name: String;
+  email: String;
+  text: String;
 }
 
 export interface ITomateos {
@@ -44,4 +49,10 @@ export interface IUser {
 
 export interface IMoviesDocument extends IMovie, Document {
   title: string;
+}
+export interface ICommentsDocument extends IComments, Document {
+  movie_id: String;
+  name: String;
+  email: String;
+  text: String;
 }

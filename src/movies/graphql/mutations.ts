@@ -1,4 +1,4 @@
-import { Movies } from "../db/models.ts";
+import { Comments, Movies } from "../db/models.ts";
 import { Users } from "../db/models.ts";
 import { type IMovie } from "../types/movie.ts";
 import { type IUser } from "../types/user.ts";
@@ -7,9 +7,28 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 export { Token } from "graphql";
 import { type IContext } from "../../index.ts";
-
+import { type IComments } from "../types/movie.ts";
 dotenv.config();
 export const movieMutations = {
+  deleteMovie: async (
+    _root: any,
+    { input }: { input: IMovie },
+    { user }: IContext
+  ) => {
+    const { title, year } = input;
+
+    const movie = await Movies.deleteOne({
+      title,
+      year,
+    });
+    console.log("qwerty");
+    if (!user) {
+      return "user oldsnq";
+    }
+
+    return "Success,deleted";
+  },
+
   addMovie: async (
     _root: any,
     { input }: { input: IMovie },
@@ -46,6 +65,25 @@ export const movieMutations = {
     }
 
     return "Success,added";
+  },
+  addComments: async (
+    _root: any,
+    { input }: { input: IComments },
+    { user }: IContext
+  ) => {
+    if (!user) {
+      return "user oldsnq";
+    }
+    const { name, email, text, movie_id } = input;
+    console.log(input, "aksokasopd");
+    const movie = await Comments.insertOne({
+      name,
+      email,
+      text,
+      movie_id,
+    });
+
+    return "Success,commented";
   },
 
   signupUser: async (_root: any, { input }: { input: IUser }) => {

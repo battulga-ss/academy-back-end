@@ -2,6 +2,7 @@ import { Schema, model } from "mongoose";
 import {
   type ITomatoesDocument,
   type IMoviesDocument,
+  type ICommentsDocument,
 } from "../types/movie.ts";
 import { type IUserDocument } from "../types/user.ts";
 const TomatoesSchema: Schema<ITomatoesDocument> = new Schema(
@@ -50,6 +51,13 @@ const userSchema: Schema<IUserDocument> = new Schema({
   email: { type: String },
   password: { type: String },
 });
+const CommentsSchema: Schema<ICommentsDocument> = new Schema({
+  movie_id: { type: String },
+  name: { type: String },
+  email: { type: String },
+  text: { type: String },
+});
 
 export const Movies = model<IMoviesDocument>("movies", MovieSchema);
 export const Users = model<IUserDocument>("users", userSchema);
+export const Comments = model<ICommentsDocument>("comments", CommentsSchema);
