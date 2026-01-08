@@ -15,9 +15,37 @@ export const movieMutations = {
     { input }: { input: IMovie },
     { user }: IContext
   ) => {
-    const movie = await Movies.insertOne({});
+    const {
+      title,
+      year,
+      runtime,
+      poster,
+      directors,
+      languages,
+      plot,
+      fullplot,
+      cast,
+      genre,
+    } = input;
 
-    return "Success";
+    const movie = await Movies.insertOne({
+      title,
+      year,
+      runtime,
+      poster,
+      directors,
+      languages,
+      plot,
+      fullplot,
+      cast,
+      genre,
+    });
+
+    if (!user) {
+      return "user oldsnq";
+    }
+
+    return "Success,added";
   },
 
   signupUser: async (_root: any, { input }: { input: IUser }) => {
