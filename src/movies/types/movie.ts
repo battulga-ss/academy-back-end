@@ -25,7 +25,7 @@ export interface IMovie {
   runtime: number;
   cast: string[];
   poster: string;
-  fullpolt: string;
+  fullplot: string;
   relased: Date;
   languages: string[];
   directors: string[];

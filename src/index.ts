@@ -4,7 +4,7 @@ import mongoose, { model } from "mongoose";
 import { typeDefs, resolvers } from "./apolloServer.ts";
 import { Users } from "./movies/db/models.ts";
 import jwt from "jsonwebtoken";
-import { Token } from "graphql";
+import { Token } from "./movies/graphql/mutations.ts";
 mongoose
   .connect(
     "mongodb+srv://blessyou100x_db_user:INXFlzZtwh8J1AsE@backend.b2ndaz2.mongodb.net/sample_mflix"
@@ -18,7 +18,7 @@ mongoose
 
 export interface IContext {
   user: {
-    firstname: string;
+    firstname: String;
   };
 }
 
@@ -27,21 +27,31 @@ const server = new ApolloServer<IContext>({
   resolvers,
 });
 
-const { url } = await startStandaloneServer(server, {
+const { url } = await startStandaloneServer<any>(server, {
   listen: { port: 4000 },
   context: async ({ req, res }) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) return res.status(401).json({ message: "Token required" });
+    const token = req.headers.authorization;
 
-    const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log("token", token);
 
-    const users = Users.find({
-      email: decoded.email,
-    });
-    if (!users) {
-      ("user oldobg");
+    if (!token) {
+      return "no token";
     }
+
+    console.log(111111);
+
+    const decoded: any = jwt.verify(token, process.env.JWT_SECRET || "secret");
+
+    const users = await Users.findOne({
+      email: decoded.email,
+    }).lean();
+
+    console.log("users", users);
+
+    if (!users) {
+      return "user oldsongue";
+    }
+
     // token
     return {
       user: users,

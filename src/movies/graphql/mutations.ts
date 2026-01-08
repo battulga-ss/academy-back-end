@@ -5,10 +5,16 @@ import { type IUser } from "../types/user.ts";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+export { Token } from "graphql";
+import { type IContext } from "../../index.ts";
 
 dotenv.config();
 export const movieMutations = {
-  addMovie: async (_root: any, { input }: { input: IMovie }) => {
+  addMovie: async (
+    _root: any,
+    { input }: { input: IMovie },
+    { user }: IContext
+  ) => {
     const movie = await Movies.insertOne({});
 
     return "Success";

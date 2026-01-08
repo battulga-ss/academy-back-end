@@ -14,8 +14,17 @@ export const movieTypesDefs = `
   }
 
   input MovieInput {
-    title: String
-    author: String
+  plot: String
+ genre:[String]
+  title: String
+  year: Int
+  runtime: Int
+  cast: [String]
+  poster: String
+  fullplot: String
+  languages: [String]
+  directors: [String]
+    
   }
   input UserInput {
     name:String
