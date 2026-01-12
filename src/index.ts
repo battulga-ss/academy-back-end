@@ -32,13 +32,9 @@ const { url } = await startStandaloneServer<any>(server, {
   context: async ({ req, res }) => {
     const token = req.headers.authorization;
 
-    console.log("token", token);
-
     if (!token) {
       return "no token";
     }
-
-    console.log(111111);
 
     const decoded: any = jwt.verify(token, process.env.JWT_SECRET || "secret");
 

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>signupPAGE</title>
+  </head>
+  <body>
+    <h2>signupPAGE PAGE</h2>
+
+    <input id="email" placeholder="email" />
+    <input id="password" placeholder="password" />
+    <button id="createBtn">signup</button>
+
+    <p id="message"></p>
+
+    <script>
+      const endpoint = "http://localhost:4000/"; // GraphQL серверийн URL
+
+      const createBtn = document.getElementById("createBtn");
+      const message = document.getElementById("message");
+
+      createBtn.addEventListener("click", async () => {
+        const email = document.getElementById("email").value;
+
+        const password = document.getElementById("password").value;
+        console.log("xdxdxd");
+
+        // localStorage-аас token-г авна
+        const token = localStorage.getItem("token");
+        // if (!token) {
+        //   message.textContent = "No token found! Please login first.";
+        //   return;
+        // }
+
+        // GraphQL mutation
+        const Mutation = `
+mutation SignupUser($input: UserInput) {
+  signupUser(input: $input)
+}
+      `;
+        console.log("zzz");
+
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              //   Authorization: `Bearer ${token}`, // token-г localStorage-аас авсан
+            },
+            body: JSON.stringify({
+              query: Mutation,
+              variables: { input: { email, password } },
+            }),
+          });
+          console.log("lololololo");
+
+          const result = await response.json();
+          console.log(result);
+
+          if (result.data && result.data.loginUser) {
+            const User = result.data.loginUser;
+            message.textContent = `login succes`;
+          } else {
+            message.textContent = "Failed to login! Check token or input.";
+          }
+        } catch (error) {
+          console.error(error);
+          message.textContent = "Error connecting to server";
+        }
+        console.log("last");
+      });
+    </script>
+  </body>
+</html>
