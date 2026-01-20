@@ -1,0 +1,3 @@
+[submodule "academy-back-end"]
+	path = academy-back-end
+	url = https://github.com/battulga-ss/academy-back-end.git
