@@ -49,7 +49,7 @@ const TomatoesSchema: Schema<ITomatoes> = new Schema(
     rotten: Number,
     lastUpdated: Date,
   },
-  { _id: false }
+  { _id: false },
 );
 
 const MovieSchema: Schema<IMoviesDocument> = new Schema({

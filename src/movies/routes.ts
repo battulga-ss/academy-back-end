@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import { Router } from "express";
 import type { Request, Response } from "express";
 
 import { Movies } from "./models.ts";
@@ -7,9 +7,10 @@ export const addMovieRouter = Router();
 // fetch("/movies");
 
 movieRouter.get("/movies", async (req: Request, res: Response) => {
-  const movie = await Movies.findOne({
-    title: "Galaxy Quest",
-  });
+  const movie = await Movies.find({}).limit(100);
+  console.log(movie);
+
+  res.json(movie);
 });
 addMovieRouter.post("/addMovies", async (req: Request, res: Response) => {
   const newMovie = await Movies.insertOne({
