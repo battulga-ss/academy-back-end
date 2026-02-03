@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Enkhtuvshin0513/academy-backend-#readme",
   "dependencies": {
+    "@tanstack/react-query": "^5.90.20",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
@@ -26,7 +27,8 @@
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.0.2",
-    "pg": "^8.16.3"
+    "pg": "^8.16.3",
+    "Router": "^2.1.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

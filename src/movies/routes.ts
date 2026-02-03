@@ -1,34 +1,23 @@
-import { Router } from "express";
-import type { Request, Response } from "express";
-
+import express, { type Request, type Response } from "express";
 import { Movies } from "./models.ts";
-export const movieRouter = Router();
-export const addMovieRouter = Router();
-// fetch("/movies");
+
+export const movieRouter = express.Router();
 
 movieRouter.get("/movies", async (req: Request, res: Response) => {
-  const movie = await Movies.find({}).limit(100);
-  console.log(movie);
+  const { genre } = req.query;
 
-  res.json(movie);
+  const query = {} as any;
+
+  if (genre) {
+    query.genres = genre;
+  }
+
+  const movies = await Movies.find(query).limit(100);
+
+  res.json(movies);
 });
-addMovieRouter.post("/addMovies", async (req: Request, res: Response) => {
-  const newMovie = await Movies.insertOne({
-    plot: "as",
-    genre: ["crime"],
-    title: "Galaxy Quest",
-    year: 2023,
-    runtime: 10,
-    cast: ["actorX, actorY"],
-    poster: "poster",
-    fullpolt: "eve",
-    relased: "2014-11-07T00:00:00.000Z",
-    languages: ["english,japanese,mongolian"],
-    directors: ["mj,tk"],
-    awards: {
-      wins: 21,
-      nominations: 12,
-      text: "xs",
-    },
-  });
+
+movieRouter.post("/addMovie", async (req: Request, res: Response) => {
+  console.log(req.body);
+  res.json({ success: true });
 });
