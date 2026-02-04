@@ -16,7 +16,6 @@ movieRouter.get("/movies", async (req: Request, res: Response) => {
 
   res.json(movies);
 });
-
 movieRouter.post("/addMovie", async (req: Request, res: Response) => {
   console.log(req.body);
   res.json({ success: true });
