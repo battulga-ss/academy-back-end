@@ -5,6 +5,12 @@ interface IRating {
   numReviews: number;
   meter: number;
 }
+export interface IComments {
+  movie_id: String;
+  name: String;
+  email: String;
+  text: String;
+}
 
 interface ITomatoes extends Document {
   viewer: IRating;
@@ -56,14 +62,14 @@ const MovieSchema: Schema<IMoviesDocument> = new Schema({
   plot: { type: String, required: true },
   genre: { type: [String], required: true },
   title: { type: String, required: true },
-  year: { type: Number },
-  runtime: { type: Number },
-  cast: { type: [String] },
-  poster: { type: String },
-  fullpolt: { type: String },
-  relased: { type: Date, default: new Date() },
-  languages: { type: [String] },
-  directors: { type: [String] },
+  year: { type: Number, required: true },
+  runtime: { type: Number, required: true },
+  cast: { type: [String], required: true },
+  poster: { type: String, required: true },
+  fullpolt: { type: String, required: true },
+  relased: { type: Date, required: true, default: new Date() },
+  languages: { type: [String], required: true },
+  directors: { type: [String], required: true },
   awards: {
     wins: { type: Number },
     nominations: { type: Number },
@@ -73,3 +79,9 @@ const MovieSchema: Schema<IMoviesDocument> = new Schema({
 });
 
 export const Movies = model<IMoviesDocument>("movies", MovieSchema);
+export interface ICommentsDocument extends IComments, Document {
+  movie_id: String;
+  name: String;
+  email: String;
+  text: String;
+}
