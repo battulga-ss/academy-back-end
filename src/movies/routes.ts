@@ -1,6 +1,5 @@
 import express, { type Request, type Response } from "express";
-import { Movies } from "./models.ts";
-
+import { Movies, Comments } from "./models.ts";
 export const movieRouter = express.Router();
 
 movieRouter.get("/movies", async (req: Request, res: Response) => {
@@ -21,7 +20,23 @@ movieRouter.post("/addMovie", async (req: Request, res: Response) => {
   res.json({ success: true });
 });
 
-movieRouter.post("/addComment", async (req, res) => {
-  // console.log(req.body);
+movieRouter.post("/addComment", async (req: Request, res: Response) => {
+  let { text, movie_id, email } = req.body;
+
+  await Comments.insertMany({
+    movie_id,
+    text,
+    email,
+  });
+
   res.json({ success: true });
+});
+
+movieRouter.get("/movie/comments", async (req: Request, res: Response) => {
+  let { movie_id } = req.query;
+  // const comments = await Comments.find({
+  //   movie_id,
+  // });
+
+  // res.json({ success: true, comments });
 });

@@ -59,17 +59,17 @@ const TomatoesSchema: Schema<ITomatoes> = new Schema(
 );
 
 const MovieSchema: Schema<IMoviesDocument> = new Schema({
-  plot: { type: String, required: true },
-  genre: { type: [String], required: true },
-  title: { type: String, required: true },
-  year: { type: Number, required: true },
-  runtime: { type: Number, required: true },
-  cast: { type: [String], required: true },
-  poster: { type: String, required: true },
-  fullpolt: { type: String, required: true },
+  plot: { type: String },
+  genre: { type: [String] },
+  title: { type: String },
+  year: { type: Number },
+  runtime: { type: Number },
+  cast: { type: [String] },
+  poster: { type: String },
+  fullpolt: { type: String },
   relased: { type: Date, required: true, default: new Date() },
-  languages: { type: [String], required: true },
-  directors: { type: [String], required: true },
+  languages: { type: [String] },
+  directors: { type: [String] },
   awards: {
     wins: { type: Number },
     nominations: { type: Number },
@@ -85,3 +85,12 @@ export interface ICommentsDocument extends IComments, Document {
   email: String;
   text: String;
 }
+
+const CommentSchema: Schema<ICommentsDocument> = new Schema({
+  movie_id: { type: String },
+  name: { type: String },
+  email: { type: String },
+  text: { type: String },
+});
+
+export const Comments = model<ICommentsDocument>("comments", CommentSchema);
