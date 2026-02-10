@@ -16,7 +16,16 @@ movieRouter.get("/movies", async (req: Request, res: Response) => {
   res.json(movies);
 });
 movieRouter.post("/addMovie", async (req: Request, res: Response) => {
-  console.log(req.body);
+   let { title,year,genre,plot,poster,runtime } = req.body;
+
+  await Movies.insertMany({
+    title,
+    year,
+    plot,
+    runtime,
+    poster,
+    genre
+  });
   res.json({ success: true });
 });
 
