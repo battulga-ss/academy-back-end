@@ -1,5 +1,6 @@
 import express, { type Request, type Response } from "express";
 import { Movies, Comments } from "./models.ts";
+import { cp } from "node:fs";
 export const movieRouter = express.Router();
 
 movieRouter.get("/movies", async (req: Request, res: Response) => {
@@ -16,7 +17,7 @@ movieRouter.get("/movies", async (req: Request, res: Response) => {
   res.json(movies);
 });
 movieRouter.post("/addMovie", async (req: Request, res: Response) => {
-   let { title,year,genre,plot,poster,runtime } = req.body;
+  let { title, year, genre, plot, poster, runtime } = req.body;
 
   await Movies.insertMany({
     title,
@@ -24,7 +25,7 @@ movieRouter.post("/addMovie", async (req: Request, res: Response) => {
     plot,
     runtime,
     poster,
-    genre
+    genre,
   });
   res.json({ success: true });
 });
@@ -42,10 +43,25 @@ movieRouter.post("/addComment", async (req: Request, res: Response) => {
 });
 
 movieRouter.get("/movie/comments", async (req: Request, res: Response) => {
-  let { movie_id } = req.query;
-  // const comments = await Comments.find({
-  //   movie_id,
-  // });
+  const { movie_id } = req.query;
 
-  // res.json({ success: true, comments });
+  const query: any = {};
+  if (movie_id) {
+    query.movie_id = movie_id;
+  }
+
+  const comments = await Comments.find(query).limit(5);
+
+  console.log("commmm", comments);
+
+  res.json(comments);
 });
+
+// movieRouter.get("/movie/comments", async (req: Request, res: Response) => {
+//   let { movie_id } = req.query;
+//   const movies = await Comments.find(query).limit(5);
+//     movie_id,
+//   });
+
+//   res.json({ success: true, comments });
+// });
