@@ -41,11 +41,16 @@ movieRouter.post("/addComment", async (req: Request, res: Response) => {
   res.json({ success: true });
 });
 
-movieRouter.get("/movie/comments", async (req: Request, res: Response) => {
-  let { movie_id } = req.query;
-  // const comments = await Comments.find({
-  //   movie_id,
-  // });
+movieRouter.get("/movie/comments", async (req, res) => {
+  const { movie_id } = req.query;
 
-  // res.json({ success: true, comments });
+  if (!movie_id) {
+    return res.status(400).json({ error: "movie_id required" });
+  }
+
+  const comments = await Comments.find({
+    movie_id: movie_id.toString(),
+  });
+
+  res.json(comments);
 });
